@@ -2,7 +2,7 @@
 <p align="center">
   <a href="https://www.edisonlee55.com"><img src="kita-ikuyo-rap.webp" alt="Banner"></a>
 </p>
- <b>_Programador autodidacta profundamente enamorado de la tecnologia_</b>
+ <b>Programador autodidacta profundamente enamorado de la tecnologia</b>
 
 ## Manejo los siguientes lenguajes
 - 👨‍💻 JavaScript (Vanilla), PHP, Python
