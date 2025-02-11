@@ -1,4 +1,4 @@
-# 👋 ¡Hola mundo!, Soy Sathoru!
+# 👋 ¡Hola mundo!, Soy Jyndev!
 <p align="center">
   <a href="https://www.edisonlee55.com"><img src="kita-ikuyo-rap.webp" alt="Banner"></a>
 </p>
