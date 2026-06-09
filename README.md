@@ -1,12 +1,6 @@
 # 👋 ¡Hola mundo! Soy Jyndev
 
 <p align="center">
-  <a href="https://www.edisonlee55.com">
-    <img src="kita-ikuyo-rap.webp" alt="Banner" width="100%" style="border-radius: 8px;">
-  </a>
-</p> phot
-
-<p align="center">
   <strong>Programador autodidacta profundamente enamorado de la tecnología y la automatización.</strong>
 </p>
 
