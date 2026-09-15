@@ -12,8 +12,7 @@
 [![Linux](https://img.shields.io/badge/Linux-Arch%20%7C%20Debian-FCC624?style=for-the-badge&logo=linux&logoColor=black)](https://kernel.org)
 
 <p align="center">
-  <a href="https://github.com/Jyndev">GitHub</a> •
-  <a href="mailto:jyndev@gmail.com">Contacto</a> •
+  <a href="https://github.com/Jyndev">GitHub Profile</a> •
   <span>📍 Cúcuta, Colombia (Disponible Remoto / Híbrido)</span>
 </p>
 
@@ -107,17 +106,21 @@ graph TD
 
 ---
 
-### 2. Mundo Diesel V2 — POS Industrial, Despacho de Combustible & Control de Flotas
-**Dominio:** Logística de Transporte Pesado & Estación de Servicio Industrial  
+### 2. Mundo Diesel V2 — POS Industrial, Venta de Repuestos Diésel & Control de Flota
+**Dominio:** Comercialización de Repuestos Diésel, Gestión Multi-Almacén & Flotas  
 **Stack:** `Django 4.2 / DRF` • `PostgreSQL / MySQL` • `Docker` • `Nixpacks` • `Gunicorn` • `React Native (Expo / EAS)`
 
 #### El Desafío
-Coordinar en tiempo real el despacho masivo de combustible diésel para maquinaria pesada propia frente a la venta minorista en mostrador POS, manteniendo control estricto de inventarios concurrentes y asignación de consumo por conductor/vehículo.
+Coordinar en tiempo real la venta en mostrador (POS) de repuestos y componentes mecánicos diésel frente al consumo interno de repuestos e insumos por parte de los vehículos y choferes de la flota de transporte pesado, manteniendo un control estricto de existencias multi-ubicación (Locales, Galpones, Almacenes) con trazabilidad de costos históricos en USD.
 
 #### Solución Arquitectónica
-* **Seguridad RBAC Stateless:** Arquitectura de roles diferenciados (`ADMIN`, `CASHIER`, `DRIVER`) controlando scopes estrictos de acceso a endpoints de facturación vs. despacho interno.
-* **Doble Libro de Inventario con Bloqueo Concurrente:** Mecanismo transaccional que previene condiciones de carrera al descontar inventario simultáneamente entre ventas de mostrador y despachos a cisternas de carga.
-* **Cliente Móvil Dedicado:** Aplicación móvil en React Native (TypeScript + Expo) compilada para dispositivos Android en patio, con captura de kilometraje, firma de comprobantes y almacenamiento seguro de sesión.
+* **Seguridad RBAC Stateless:** Arquitectura de roles diferenciados (`ADMIN`, `CASHIER`, `DRIVER`) controlando scopes estrictos de acceso (ventas de mostrador vs. retiros de repuestos e insumos por placa de vehículo).
+* **Inventario Multi-Ubicación con Trazabilidad Exhaustiva (`LogProductos`):**
+  * Control de existencias por depósito físico (`StockPorUbicacion`) y registro inmutable de movimientos (`ENTRADA`, `TRASPASO`, `VENTA`, `CONSUMO_INTERNO`, `CONSUMO_INTERNO_TRANSPORTE`, `AJUSTES`).
+  * Mecanismo transaccional que previene condiciones de carrera o inconsistencias en stock al despachar repuestos concurrentemente.
+* **Control de Consumo Interno por Vehículo:**
+  * Módulo especializado (`internal_consumption`) que vincula el retiro de repuestos al vehículo receptor (normalización de placa, año, marca) y chofer responsable, calculando dinámicamente el costo acumulado en USD con captura del costo de compra exacto al momento del despacho.
+* **Cliente Móvil Dedicado:** Aplicación móvil en React Native (TypeScript + Expo) compilada para operadores y conductores, con captura de retiros de repuestos en patio, verificación de compatibilidad e inicio de sesión seguro.
 * **Contenerización Reproducible:** Configuración con `Dockerfile`, perfiles de `nixpacks.toml` y orquestación con Gunicorn y Whitenoise.
 
 #### Diagrama de Arquitectura
@@ -125,15 +128,16 @@ Coordinar en tiempo real el despacho masivo de combustible diésel para maquinar
 graph LR
     subgraph Actores["Actores del Sistema"]
         Cajero["🏪 Cajero Mostrador (POS)"]
-        Conductor["🚛 Conductor en Patio (App Android)"]
-        Admin["📊 Gerencia de Operaciones"]
+        Conductor["🚛 Chofer de Flota (App Móvil)"]
+        Admin["📊 Gerencia & Logística"]
     end
 
     subgraph API["API Gateway & Reglas de Negocio (DRF)"]
         RBAC["🛡️ RBAC Middleware\n(Admin / Cashier / Driver)"]
-        SalesEngine["💵 Facturación Comercial POS"]
-        FleetEngine["⛽ Despacho Flota Interna (Km/Horómetro)"]
-        InventoryLock["🔒 Lock de Inventario Concurrente"]
+        SalesEngine["💵 Facturación POS (Repuestos)"]
+        FleetEngine["🔧 Consumo Interno (Por Placa de Vehículo)"]
+        StockManager["📦 Stock Multi-Ubicación\n(Almacén / Galpón / Local)"]
+        AuditLog["📜 Log Inmutable de Movimientos\n(LogProductos)"]
     end
 
     subgraph DataStore["Capa de Datos"]
@@ -145,9 +149,10 @@ graph LR
     Admin --> RBAC
     RBAC --> SalesEngine
     RBAC --> FleetEngine
-    SalesEngine --> InventoryLock
-    FleetEngine --> InventoryLock
-    InventoryLock --> DB
+    SalesEngine --> StockManager
+    FleetEngine --> StockManager
+    StockManager --> AuditLog
+    AuditLog --> DB
 ```
 
 ---
@@ -229,9 +234,9 @@ Modernizar una plataforma operativa monolítica legacy en PHP procedural que pro
 
 <div align="center">
 
-### 📬 ¿Buscando un Ingeniero Backend que resuelva problemas reales en producción?
+### 💼 ¿Buscando un Ingeniero Backend para tu equipo o proyecto?
 
-**Conectemos:** [jyndev@gmail.com](mailto:jyndev@gmail.com) • [GitHub Profile](https://github.com/Jyndev)
+**Conectemos vía [GitHub Profile](https://github.com/Jyndev)**
 
 *© 2026 Jyndev. Construyendo sistemas confiables línea por línea.*
 
